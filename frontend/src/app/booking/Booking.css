@@ -1,0 +1,252 @@
+.booking {
+  min-height: 100vh;
+}
+
+.booking-hero {
+  background: linear-gradient(135deg, #ffc8dd 0%, #ffafcc 50%, #bde0fe 100%);
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #fff;
+}
+
+.booking-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.booking-hero p {
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+.booking-form-section {
+  padding: 4rem 2rem;
+  background-color: #fff;
+}
+
+.booking-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 3rem;
+}
+
+.booking-info {
+  background: linear-gradient(135deg, #ffc8dd 0%, #ffafcc 100%);
+  padding: 2rem;
+  border-radius: 15px;
+  color: #fff;
+  height: fit-content;
+}
+
+.booking-info h2 {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.booking-info p {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.info-box {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-top: 2rem;
+}
+
+.info-box h3 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.info-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.info-box li {
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.info-box li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.booking-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #ff69b4;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #ffc8dd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #ff69b4;
+  box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-group select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.helper-text {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.warning-text {
+  font-size: 0.9rem;
+  color: #ff6600;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  background-color: #fff3cd;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border-left: 4px solid #ff6600;
+}
+
+.error-message {
+  background-color: #fee;
+  color: #c33;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 2px solid #fcc;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #ff69b4;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #ff1493;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+}
+
+.submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submit-button:disabled:hover {
+  background-color: #ccc;
+  transform: none;
+  box-shadow: none;
+}
+
+.success-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  background: linear-gradient(135deg, #ffc8dd 0%, #ffafcc 100%);
+  border-radius: 15px;
+  color: #fff;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  color: #ff69b4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0 auto 2rem;
+}
+
+.success-message h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.success-message p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.confirmation-note {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.3);
+  font-style: italic;
+}
+
+.recaptcha-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+@media (max-width: 968px) {
+  .booking-container {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-hero h1 {
+    font-size: 2rem;
+  }
+
+  .success-message h2 {
+    font-size: 2rem;
+  }
+}
