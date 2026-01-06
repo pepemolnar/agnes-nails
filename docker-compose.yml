@@ -1,0 +1,76 @@
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: agnes-nails-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: agnes_nails
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - agnes-nails-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: agnes-nails-backend
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_NAME: agnes_nails
+      PORT: 3001
+      NODE_ENV: production
+      RECAPTCHA_SECRET_KEY: 6Lc94EEsAAAAALZJ6vZ4a45LPF2ZGsvpn6SCJOSg
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - agnes-nails-network
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3001 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: agnes-nails-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:3001
+      NEXT_PUBLIC_RECAPTCHA_SITE_KEY: 6Lc94EEsAAAAAJfMuaaD8NBtkQgU40sFenhtVZ7g
+      NODE_ENV: production
+    depends_on:
+      - backend
+    networks:
+      - agnes-nails-network
+
+networks:
+  agnes-nails-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
