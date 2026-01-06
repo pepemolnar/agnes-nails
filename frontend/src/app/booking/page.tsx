@@ -522,7 +522,7 @@ export default function Booking() {
                 <div className="form-group recaptcha-container">
                   <ReCAPTCHA
                     ref={recaptchaRef}
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
+                    sitekey={'6Lc94EEsAAAAAJfMuaaD8NBtkQgU40sFenhtVZ7g'}
                     onChange={(token) => setRecaptchaToken(token)}
                     onExpired={() => setRecaptchaToken(null)}
                   />
