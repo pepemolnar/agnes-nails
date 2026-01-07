@@ -186,12 +186,61 @@ NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your_recaptcha_site_key_here  # Get from https://
 
 All admin-protected endpoints require `Authorization: Bearer <token>` header.
 
+**Health**: `GET /health` - Health check endpoint (returns status, timestamp, uptime)
 **Appointments**: `/appointments` (GET public, POST/PATCH/DELETE protected)
 **Blocked Dates**: `/blocked-dates` (GET public, POST/PATCH/DELETE protected)
 **Open Hours**: `/open-hours` (GET public, POST/PATCH/DELETE protected)
   - `POST /open-hours/initialize` - Initialize default hours (Mon-Fri 9-5)
   - `POST /open-hours/reset` - Reset to defaults (clears existing)
 **Auth**: `POST /auth/login` - Returns JWT token
+
+## Production Deployment
+
+### Production Docker Setup
+
+Production deployment uses separate Dockerfiles and configuration:
+
+**Files**:
+- `docker-compose.prod.yml` - Production Docker Compose configuration
+- `backend/Dockerfile.prod` - Multi-stage production build for backend
+- `frontend/Dockerfile.prod` - Optimized Next.js production build
+- `nginx/nginx.conf` - Reverse proxy with SSL support
+- `.env.production` - Production environment variables (not in git)
+
+**Deployment Stack**:
+- Nginx reverse proxy for SSL/TLS and routing
+- Certbot for Let's Encrypt SSL certificates
+- PostgreSQL with persistent volumes
+- Backend and frontend as containerized services
+- Automated SSL certificate renewal
+
+**Key Features**:
+- Multi-stage Docker builds for smaller images
+- Non-root users for security
+- Health checks for all services
+- Automatic restart policies
+- Database backups via `scripts/backup.sh`
+
+**Documentation**:
+- `DEPLOYMENT.md` - Comprehensive step-by-step VPS deployment guide
+- `DEPLOYMENT-QUICK-REFERENCE.md` - Quick command reference for operations
+- `scripts/README.md` - Backup script documentation
+
+**Health Check Endpoint**:
+- `GET /health` - Returns application status (used by Docker healthcheck)
+
+### Quick Production Deploy
+
+```bash
+# On VPS
+git clone <repo>
+cd agnes-nails
+cp .env.production.example .env.production
+# Edit .env.production with secure values
+docker compose -f docker-compose.prod.yml up -d --build
+```
+
+See `DEPLOYMENT.md` for complete instructions including SSL setup.
 
 ## Important Notes
 
@@ -201,6 +250,7 @@ All admin-protected endpoints require `Authorization: Bearer <token>` header.
 - **Client-side Auth**: Uses localStorage - tokens persist across browser sessions.
 - **Hot Reload**: Docker dev mode mounts source directories for live updates.
 - **Indexing**: Do NOT index node_modules folder
+- **Production Security**: Change default admin password, use strong JWT_SECRET, enable HTTPS
 - **reCAPTCHA Setup**:
   1. Get site key and secret key from https://www.google.com/recaptcha/admin (select reCAPTCHA v2)
   2. Add `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` to `frontend/.env.local`
