@@ -4,7 +4,7 @@ frontend
 backend
 
 # Environment variables
-.env
+.env*
 .env.local
 .env.production
 
