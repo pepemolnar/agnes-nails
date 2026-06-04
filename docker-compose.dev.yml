@@ -37,7 +37,13 @@ services:
       DATABASE_NAME: agnes_nails
       PORT: 3001
       NODE_ENV: development
-      RECAPTCHA_SECRET_KEY: 6Lct9kEsAAAAAMSJ6UwJk_nCE2afraw2R3PnSaZx
+      JWT_SECRET: ${JWT_SECRET}
+      RECAPTCHA_SECRET_KEY: ${RECAPTCHA_SECRET_KEY}
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+      SENDGRID_FROM_EMAIL: ${SENDGRID_FROM_EMAIL}
+      SENDGRID_FROM_NAME: ${SENDGRID_FROM_NAME}
+      SENDGRID_TEMPLATE_CONFIRMATION: ${SENDGRID_TEMPLATE_CONFIRMATION}
+      SENDGRID_TEMPLATE_CANCELLATION: ${SENDGRID_TEMPLATE_CANCELLATION}
     volumes:
       - ./backend:/app
       - /app/node_modules
@@ -58,8 +64,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:3001
-      NEXT_PUBLIC_RECAPTCHA_SITE_KEY: 6Lct9kEsAAAAAF_CCpjREda6-4ySvDw7eH6hsy6s
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+      NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
       NODE_ENV: development
     volumes:
       - ./frontend:/app
